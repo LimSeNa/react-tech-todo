@@ -3,27 +3,23 @@ import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
 import {useCallback, useRef, useState} from "react";
 
-const App = () => {
-    const [todos, setTodos] = useState([
-        {
+function createBulkTodos() {
+    const array = [];
+    for(let i = 1; i < 2500; i++) {
+        array.push({
             id: 1,
-            text: '리액트 세미나 준비하기',
-            checked: true,
-        },
-        {
-            id: 2,
-            text: '자바스크립트 세미나 준비하기',
-            checked: false,
-        },
-        {
-            id: 3,
-            text: '정처기 실기 시험 준비하기',
-            checked: false,
-        },
-    ]);
+            text: `할 일 ${i}`,
+            checked: false
+        });
+    }
+    return array;
+}
+
+const App = () => {
+    const [todos, setTodos] = useState(createBulkTodos);
 
     // 고윳값을 사용될 id는 ref를 사용하여 변수에 담기
-    const nextId = useRef(4);
+    const nextId = useRef(2501);
 
     const onInsert = useCallback(text => {
         const todo = {
