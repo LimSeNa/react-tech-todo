@@ -7,9 +7,9 @@ function createBulkTodos() {
     const array = [];
     for(let i = 1; i < 2500; i++) {
         array.push({
-            id: 1,
+            id: i,
             text: `할 일 ${i}`,
-            checked: false
+            checked: false,
         });
     }
     return array;
@@ -27,22 +27,22 @@ const App = () => {
             text,
             checked: false,
         };
-        setTodos(todos.concat(todo));
+        setTodos(todos => todos.concat(todo));
         nextId.current += 1;
-    }, [todos]);
+    }, []);
 
     const onRemove = useCallback(
         id => {
-            setTodos(todos.filter(todo => todo.id !== id));
+            setTodos(todos => todos.filter(todo => todo.id !== id));
         },
-        [todos],
+        [],
     );
 
     const onToggle = useCallback(
         id => {
-            setTodos(todos.map(todo => todo.id === id ? {...todo, checked: !todo.checked} : todo,),);
+            setTodos(todos => todos.map(todo => todo.id === id ? {...todo, checked: !todo.checked} : todo,),);
         },
-        [todos],
+        [],
     );
 
     return (
